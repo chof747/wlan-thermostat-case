@@ -30,7 +30,7 @@ for filename in os.listdir(components_dir):
 
     # Load the FreeCAD document
     doc_path = os.path.join(components_dir, filename)
-    base_na me = os.path.splitext(filename)[0]
+    base_name = os.path.splitext(filename)[0]
 
     print("\n#####")
     print(f'Opening: {base_name} from "{doc_path}"')
