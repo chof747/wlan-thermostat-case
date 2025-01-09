@@ -1,0 +1,42 @@
+name: FreeCAD STL Export
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  export-stl:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install FreeCAD
+      run: |
+         sudo add-apt-repository ppa:freecad-maintainers/freecad-stable -y
+         sudo apt-get update
+         sudo apt-get install freecad -y
+
+    - name: Run STL export script
+      run: |
+        /usr/bin/freecadcmd lifecycle/stl-export.py
+    
+    - name: Archive STL files
+      if: always()
+      run: |
+        zip -r stl-files.zip 3dmodel/stl
+        ls -l stl-files.zip
+
+    - name: Upload STL artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: stl-files
+        path: stl-files.zip
