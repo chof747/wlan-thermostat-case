@@ -31,7 +31,7 @@ jobs:
     - name: Archive STL files
       if: always()
       run: |
-        zip -r stl-files.zip 3dmodel/stl
+        zip -r stl-files.zip stl
         ls -l stl-files.zip
 
     - name: Upload STL artifact
