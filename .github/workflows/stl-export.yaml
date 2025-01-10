@@ -3,7 +3,7 @@ name: FreeCAD STL Export
 on:
   push:
     branches:
-      - main
+      - release
 
 jobs:
   export-stl:
@@ -36,7 +36,7 @@ jobs:
 
     - name: Upload STL artifact
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: stl-files
         path: stl-files.zip
